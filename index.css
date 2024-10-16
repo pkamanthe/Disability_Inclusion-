@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+h1 {
+    color: #007bff;
+}
+
+nav {
+    text-align: center;
+    background-color: #007bff;
+    padding: 20px;
+    color: white;
+}
+
+nav p {
+    font-size: 1.2em;
+}
+
+nav button {
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #007bff;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#add-challenge-section {
+    text-align: center;
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+form input, form textarea {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#challenges-section {
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.challenge-card {
+    background-color: white;
+    padding: 20px;
+    margin: 10px 0;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.challenge-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.actions button {
+    margin: 5px;
+    background-color: #007bff;
+    border: none;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.delete-comment {
+    background-color: red;
+    padding: 5px;
+    color: white;
+    border: none;
+    margin-left: 10px;
+    cursor: pointer;
+}

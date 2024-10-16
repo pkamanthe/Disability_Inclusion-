@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disability & Climate Change</title>
+    <link rel="stylesheet" href="./index.css">
+    <script src="./index.js" defer></script>
+    <style>
+        /* Simple styles for high-contrast mode */
+        body.high-contrast {
+            background-color: black;
+            color: white;
+        }
+        .text-large {
+            font-size: 1.5em;
+        }
+        .challenge-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .feedback-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        #notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            display: none; /* Hidden by default */
+        }
+        .challenge-description {
+            margin-top: 5px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation or landing page -->
+    <nav>
+        <h1>Disability and Climate Change Platform</h1>
+        <p>Explore the challenges faced by people with disabilities in relation to climate change.</p>
+        <button id="start-btn">Get Started</button>
+    </nav>
+
+    <header>
+        <div id="add-challenge-section" style="display:none;">
+            <h2>Add New Challenge</h2>
+            <form id="add-challenge-form">
+                <label for="disability">Disability Type:</label>
+                <input type="text" id="disability" placeholder="Enter disability type" required>
+
+                <label for="challenge">Challenge Description:</label>
+                <textarea id="challenge" placeholder="Enter description of the challenge" required></textarea>
+
+                <label for="image_url">Image URL:</label>
+                <input type="url" id="image_url" placeholder="Enter image URL" required>
+
+                <button type="submit">Add Challenge</button>
+            </form>
+        </div>
+    </header>
+
+    <main>
+        <section id="challenges-section">
+            <!-- Challenges will be dynamically loaded here -->
+        </section>
+
+        <!-- Accessibility Options -->
+        <section id="accessibility-options">
+            <h2>Accessibility Options</h2>
+            <button id="toggle-contrast">Toggle High-Contrast Mode</button>
+            <button id="increase-font">Increase Text Size</button>
+            <button id="reset-font">Reset Text Size</button>
+        </section>
+
+        <!-- Feedback Mechanism -->
+        <section id="feedback-section">
+            <h2>Feedback</h2>
+            <form id="feedback-form">
+                <textarea id="feedback" placeholder="Share your feedback" required></textarea>
+                <button type="submit">Submit Feedback</button>
+            </form>
+        </section>
+
+        <!-- Feedback Display Section -->
+        <section id="feedback-display-section">
+            <h2>Feedback Received</h2>
+            <div id="feedback-list"></div>
+        </section>
+
+        <!-- Notification Section -->
+        <div id="notification"></div>
+    </main>
+
+    <script>
+        // Show the add challenge section when the start button is clicked
+        document.getElementById('start-btn').addEventListener('click', function() {
+            document.getElementById('add-challenge-section').style.display = 'block';
+            this.style.display = 'none'; // Hide the start button after clicking
+        });
+
+        // Handle form submission for adding challenges
+        document.getElementById('add-challenge-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Retrieve input values
+            const disability = document.getElementById('disability').value;
+            const challengeDescription = document.getElementById('challenge').value;
+            const imageUrl = document.getElementById('image_url').value;
+
+            // Create a new challenge object
+            const newChallenge = {
+                disability: disability,
+                description: challengeDescription,
+                image_url: imageUrl,
+                likes: 0,
+                dislikes: 0,
+            };
+
+            // Display the new challenge
+            displayChallenge(newChallenge);
+
+            // Show notification
+            notifyUser("New challenge has been added!");
+
+            // Clear the form
+            this.reset();
+        });
+
+        function displayChallenge(challenge) {
+            const challengesSection = document.getElementById('challenges-section');
+            const challengeCard = document.createElement('div');
+            challengeCard.classList.add('challenge-card');
+
+            challengeCard.innerHTML = `
+                <h3>${challenge.disability}</h3>
+                <img src="${challenge.image_url}" alt="${challenge.disability}" class="challenge-image" style="max-width: 100%; height: auto; cursor: pointer;" />
+                <p class="challenge-description" style="display: none;">${challenge.description}</p>
+                <div class="actions">
+                    <button class="like">👍 <span class="like-count">${challenge.likes}</span></button>
+                    <button class="dislike">👎 <span class="dislike-count">${challenge.dislikes}</span></button>
+                </div>
+            `;
+
+            // Add click event to the image
+            const imgElement = challengeCard.querySelector('img');
+            const descriptionElement = challengeCard.querySelector('.challenge-description');
+
+            imgElement.addEventListener('click', () => {
+                // Toggle the display of the description
+                const isVisible = descriptionElement.style.display === 'block';
+                descriptionElement.style.display = isVisible ? 'none' : 'block';
+            });
+
+            challengesSection.appendChild(challengeCard);
+        }
+
+        // Accessibility Features
+        const toggleContrastButton = document.getElementById('toggle-contrast');
+        const increaseFontButton = document.getElementById('increase-font');
+        const resetFontButton = document.getElementById('reset-font');
+        let isHighContrast = false;
+        let isLargeFont = false;
+
+        toggleContrastButton.addEventListener('click', () => {
+            isHighContrast = !isHighContrast;
+            document.body.classList.toggle('high-contrast', isHighContrast);
+        });
+
+        increaseFontButton.addEventListener('click', () => {
+            isLargeFont = true;
+            document.body.classList.add('text-large');
+        });
+
+        resetFontButton.addEventListener('click', () => {
+            isLargeFont = false;
+            document.body.classList.remove('text-large');
+        });
+
+        // Feedback Mechanism
+        const feedbackForm = document.getElementById('feedback-form');
+        const feedbackListDiv = document.getElementById('feedback-list');
+
+        feedbackForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const feedback = document.getElementById('feedback').value;
+            alert(`Feedback submitted: ${feedback}`);
+
+            // Display feedback
+            displayFeedback(feedback);
+            // Show notification for feedback submission
+            notifyUser("Your feedback has been submitted!");
+
+            feedbackForm.reset(); // Clear the form after submission
+        });
+
+        // Function to display feedback
+        function displayFeedback(feedback) {
+            const feedbackItem = document.createElement('div');
+            feedbackItem.classList.add('feedback-card');
+            feedbackItem.textContent = feedback;
+
+            feedbackListDiv.appendChild(feedbackItem);
+        }
+
+        // Function to show notifications
+        function notifyUser(message) {
+            const notificationDiv = document.getElementById('notification');
+            notificationDiv.textContent = message;
+            notificationDiv.style.display = 'block'; // Show notification
+
+            // Automatically hide the notification after 3 seconds
+            setTimeout(() => {
+                notificationDiv.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

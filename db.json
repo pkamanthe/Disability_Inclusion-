@@ -1,0 +1,28 @@
+{
+  "challenges": [
+    {
+      "id": "1",
+      "disability": "Visual Impairment",
+      "description": "Increased climate-related disasters make navigation more dangerous for individuals with visual impairments.",
+      "image_url": "https://lhblind.org/wp-content/uploads/2021/10/eIMG_2006-web-1024x682.jpg",
+      "likes": 10,
+      "dislikes": 2
+    },
+    {
+      "id": "2",
+      "disability": "Mobility Impairment",
+      "description": "Floods and wildfires disrupt accessibility and make evacuation nearly impossible for people with mobility challenges.",
+      "image_url": "https://www.enableme.ke/countrys/kenya/image-thumb__8705__header-image/Floods.jpg",
+      "likes": 20,
+      "dislikes": 1
+    },
+    {
+      "id": "3",
+      "disability": "Hearing Impairment",
+      "description": "Emergency alerts and warnings about climate events are often inaccessible to those who are deaf or hard of hearing.",
+      "image_url": "https://www.enableme.ke/countrys/kenya/deaf-hearing-impaired/image-thumb__3259__header-image/help-and-perfect-sign-language.jpg",
+      "likes": 0,
+      "dislikes": 0
+    }
+  ]
+}

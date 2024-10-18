@@ -5,7 +5,7 @@
       "disability": "Visual Impairment",
       "description": "Increased climate-related disasters make navigation more dangerous for individuals with visual impairments.",
       "image_url": "https://lhblind.org/wp-content/uploads/2021/10/eIMG_2006-web-1024x682.jpg",
-      "likes": 10,
+      "likes": 13,
       "dislikes": 2
     },
     {
@@ -23,6 +23,14 @@
       "image_url": "https://www.enableme.ke/countrys/kenya/deaf-hearing-impaired/image-thumb__3259__header-image/help-and-perfect-sign-language.jpg",
       "likes": 0,
       "dislikes": 0
+    },
+    {
+      "id": "4",
+      "disability": "Albinism",
+      "description": "People with albinism often have sensitive skin and may struggle with overheating, as their bodies may not efficiently regulate heat due to the lack of pigmentation.",
+      "image_url": "https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/25E7/production/_133030790_59740273-d7de-4908-99d8-5ce8ae11e3a1.jpg",
+      "likes": 11,
+      "dislikes": 1
     }
   ]
 }
